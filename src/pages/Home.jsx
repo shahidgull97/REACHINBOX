@@ -50,7 +50,7 @@ function Home() {
             from: "beatrix@gmail.com",
             to: "lennon.j@mail.com",
             subject: "New Product Launch",
-            greeting: "Hi [FIRST_NAME],",
+            greeting: "Hi Lennon,",
             body: "I would like to introduce you to SaaS Grow, a productized design service specifically tailored for saas startups. Our aim is to help you enhance the user experience and boost the visual appeal of your software products.",
             date: "Mar 7",
             status: "Interested",
