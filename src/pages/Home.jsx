@@ -5,22 +5,41 @@ import EmailContent from "../components/EmailContent";
 import LeadDetails from "../components/LeadDetails";
 import { useState, useEffect } from "react";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import TopBar from "../components/TopBar";
+import { useDetails } from "../context/userContext";
 function Home() {
   const [emails, setEmails] = useState([]);
   const [selectedEmail, setSelectedEmail] = useState(null);
   const [leadDetails, setLeadDetails] = useState(null);
+  const { darkMode } = useDetails();
 
   // Fetch emails from Firestore
   useEffect(() => {
     const fetchEmails = async () => {
       try {
-        const emailsCollection = collection(db, "emails");
-        const emailSnapshot = await getDocs(emailsCollection);
-        const emailList = emailSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setEmails(emailList);
+        // const emailsCollection = collection(db, "emails");
+        // const emailSnapshot = await getDocs(emailsCollection);
+        // const emailList = emailSnapshot.docs.map((doc) => ({
+        //   id: doc.id,
+        //   ...doc.data(),
+        // }));
+        const emailList = await fetch(
+          `https://hiring.reachinbox.xyz/api/v1/onebox/list`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
+              "Content-Type": "application/json", // Optional, based on API
+            },
+          }
+        );
+        console.log(emailList);
+        console.log(emailList.bodyUsed);
+        if (!emailList.bodyUsed) {
+          throw new Error("body is empty");
+        }
+
+        setEmails(emailList.data);
       } catch (error) {
         console.error("Error fetching emails: ", error);
 
@@ -133,14 +152,24 @@ function Home() {
     }
   };
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div
+      className={`flex h-screen ${
+        darkMode ? "bg-black text-white" : "bg-gray-100 text-black"
+      } `}
+    >
+      {/* Sidebar */}
       <Sidebar />
+      <TopBar />
       <EmailList
         emails={emails}
         selectedEmail={selectedEmail}
         onSelectEmail={handleEmailSelect}
       />
-      <div className="flex-1 flex flex-col bg-gray-900 text-white">
+      <div
+        className={` flex flex-col ${
+          darkMode ? "bg-black text-white" : "bg-gray-100 text-black"
+        } w-[62.5rem] h-[97%] text-white relative top-14 overflow-y-auto`}
+      >
         <EmailContent email={selectedEmail} />
       </div>
       {selectedEmail && (

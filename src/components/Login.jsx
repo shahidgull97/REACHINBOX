@@ -15,7 +15,22 @@ const LoginPage = () => {
     try {
       //   const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, googleProvider);
-      // navigate("/dashboard"); // Navigate after successful login
+      // const result = await fetch(
+      //   `https://hiring.reachinbox.xyz/api/v1/auth/google-login?redirect_to=https://frontend.com`,
+      //   {
+      //     method: "GET",
+      //     headers: {
+      //       "Content-Type": "application/json", // Optional, based on API
+      //     },
+      //   }
+      // );
+      console.log(result);
+      if (result.status === 200) {
+        setIsLoggedIn(true);
+        navigate("/home");
+      } else {
+        console.error("Google sign-in failed");
+      }
     } catch (error) {
       console.error("Google sign-in error:", error);
     }

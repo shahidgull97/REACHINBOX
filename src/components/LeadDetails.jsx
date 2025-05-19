@@ -1,13 +1,19 @@
 // Add this to a file called LeadDetails.jsx
 import { Mail, Send, Clock } from "lucide-react";
 import React from "react";
+import { useDetails } from "../context/userContext";
 function LeadDetails({ email, leadDetails }) {
+  const { darkMode } = useDetails();
   if (!email) {
     return null;
   }
 
   return (
-    <div className="w-64 bg-gray-900 text-white border-l border-gray-700 overflow-y-auto">
+    <div
+      className={`w-80 ${
+        darkMode ? "bg-black text-white" : "bg-gray-100 text-black"
+      }   border-l border-gray-700 overflow-y-auto relative top-12`}
+    >
       <div className="p-4 border-b border-gray-700">
         <h2 className="font-semibold">Lead Details</h2>
       </div>

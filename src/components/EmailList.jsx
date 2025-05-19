@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Search, ChevronDown, Trash2 } from "lucide-react";
 import React from "react";
+
 function EmailList({ emails, selectedEmail, onSelectEmail }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedTab, setSelectedTab] = useState("Newest");
@@ -14,7 +15,7 @@ function EmailList({ emails, selectedEmail, onSelectEmail }) {
   );
 
   return (
-    <div className="w-64 bg-gray-800 text-white flex flex-col border-r border-gray-700">
+    <div className="w-[25rem]   flex flex-col border-r border-gray-700 relative top-12 overflow-y-auto ">
       <div className="p-4 border-b border-gray-700">
         <div className="flex items-center justify-between">
           <div className="flex items-center">

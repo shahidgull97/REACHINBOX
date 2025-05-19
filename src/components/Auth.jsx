@@ -15,44 +15,8 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../config/Firebase";
+import { useNavigate } from "react-router-dom";
 
-// Mock Firebase Auth functions
-// Replace these with your actual Firebase implementation
-// const mockFirebase = {
-//   auth: {
-//     createUserWithEmailAndPassword: (email, password) => {
-//       return new Promise((resolve, reject) => {
-//         setTimeout(() => {
-//           if (email && password && password.length >= 6) {
-//             resolve({ user: { email } });
-//           } else {
-//             reject({
-//               code: "auth/weak-password",
-//               message: "Password should be at least 6 characters",
-//             });
-//           }
-//         }, 1000);
-//       });
-//     },
-//     signInWithEmailAndPassword: (email, password) => {
-//       return new Promise((resolve, reject) => {
-//         setTimeout(() => {
-//           if (email && password) {
-//             resolve({ user: { email } });
-//           } else {
-//             reject({
-//               code: "auth/wrong-password",
-//               message: "Invalid email or password",
-//             });
-//           }
-//         }, 1000);
-//       });
-//     },
-//   },
-// };
-
-// // Replace with your actual Firebase implementation
-// const firebase = mockFirebase;
 import { useDetails } from "../context/userContext";
 export default function AuthPage() {
   const [email, setEmail] = useState("");
@@ -63,6 +27,7 @@ export default function AuthPage() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const { isLoggedIN, setIsLoggedIn } = useDetails();
+  const navigate = useNavigate();
   useEffect(() => {
     // Reset form when switching between login and signup
     setEmail("");
@@ -87,6 +52,7 @@ export default function AuthPage() {
         // Login
         const result = await signInWithEmailAndPassword(auth, email, password);
         setSuccess("Login successful!");
+        navigate("/home");
       } else {
         // Sign up
         console.log("Creating user with email:", email);

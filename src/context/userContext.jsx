@@ -10,6 +10,7 @@ const userContext = createContext();
 // Create the context provider component
 const UserDetails = ({ children }) => {
   const [isLoggedIN, setIsLoggedIn] = useState(false); // Example state
+  const [darkMode, setDarkMode] = useState(true);
 
   // logout function
   const signOutUser = async () => {
@@ -23,7 +24,9 @@ const UserDetails = ({ children }) => {
   };
 
   return (
-    <userContext.Provider value={{ isLoggedIN, setIsLoggedIn, signOutUser }}>
+    <userContext.Provider
+      value={{ isLoggedIN, setIsLoggedIn, signOutUser, darkMode, setDarkMode }}
+    >
       {children}
     </userContext.Provider>
   );

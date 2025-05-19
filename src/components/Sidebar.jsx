@@ -12,12 +12,12 @@ import {
 
 function Sidebar() {
   return (
-    <div className="w-16 bg-gray-900 text-white flex flex-col items-center py-4 space-y-6">
-      <div className="p-2 bg-gray-800 rounded">
+    <div className="w-20 flex flex-col items-center py-4 space-y-6 border-2 ">
+      <div className="p-2  rounded">
         <Mail size={20} />
       </div>
       <div className="flex flex-col items-center space-y-6 mt-6">
-        <button className="p-2 hover:bg-gray-800 rounded">
+        <button className="p-2   rounded">
           <Inbox size={20} />
         </button>
         <button className="p-2 hover:bg-gray-800 rounded">
@@ -40,7 +40,7 @@ function Sidebar() {
         </button>
       </div>
       <div className="mt-auto p-2 bg-green-600 rounded-full">
-        <div className="text-white">AS</div>
+        <div className="text-white">PS</div>
       </div>
     </div>
   );
